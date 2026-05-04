@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cbmt-v014'; 
+const CACHE_NAME = 'cbmt-v015'; 
 const urlsToCache = [
   'index.html',
   'style.css',

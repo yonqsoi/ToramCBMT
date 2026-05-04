@@ -241,5 +241,37 @@
             window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js'); });
         }
     </script>
+        <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            // 1. Register the Service Worker
+            navigator.serviceWorker.register('sw.js').then(registration => {
+                
+                // 2. Watch for new updates from GitHub
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    
+                    newWorker.addEventListener('statechange', () => {
+                        // 3. If a new version is downloaded and ready
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // 4. Pop up a native prompt to the user
+                            if (confirm("A new version of Toram CBMT is available! Tap OK to update.")) {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                });
+            });
+
+            // 5. Instantly refresh the page if the service worker takes over
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    window.location.reload();
+                    refreshing = true;
+                }
+            });
+        }
+    </script>
 </body>
 </html>
