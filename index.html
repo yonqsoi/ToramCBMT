@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Toram CBMT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="app-header">
+        <h1 class="app-logo">Toram CBMT</h1>
+        <p class="header-subtitle">Market & Tax Optimizer</p>
+
+        <div class="buff-section">
+            <span class="section-label">Active Tax Reductions</span>
+            
+            <div class="tickets">
+                <label class="ticket-label">
+                    <input type="checkbox" id="tickStd">
+                    <div class="ticket-card">
+                        <span class="ticket-name">Standard</span>
+                        <span class="ticket-desc">-20% Fee</span>
+                    </div>
+                </label>
+                
+                <label class="ticket-label">
+                    <input type="checkbox" id="tickLvl">
+                    <div class="ticket-card">
+                        <span class="ticket-name">Leveling</span>
+                        <span class="ticket-desc">-30% Fee</span>
+                    </div>
+                </label>
+
+                <label class="ticket-label">
+                    <input type="checkbox" id="tickBag">
+                    <div class="ticket-card">
+                        <span class="ticket-name">Bag</span>
+                        <span class="ticket-desc">-10% Fee</span>
+                    </div>
+                </label>
+            </div>
+
+            <div class="guild-row">
+                <div class="guild-label">🛡️ Guild Market Buff</div>
+                <div style="display:flex; align-items:center;">
+                    <input type="number" id="guildBuff" class="guild-input" value="4" min="0" max="100">
+                    <span style="margin-left: 6px; font-size: 14px; color: var(--text-muted); font-weight: 700;">%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fee-highlight-card">
+            <span class="fee-highlight-label">Effective Market Fee:</span>
+            <span id="feeDisplay" class="fee-highlight-value">10.0%</span>
+        </div>
+    </div>
+
+    <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="board">Board (14)</button>
+        <button class="tab-btn" data-tab="stock">Stock</button>
+        <button class="tab-btn" data-tab="alerts">Alerts <span id="alertBadge" class="badge hidden">!</span></button>
+        <button class="tab-btn" data-tab="log">Logs</button>
+    </nav>
+
+    <div id="board" class="tab-content active">
+        <div id="cbSlots" class="slots-grid"></div>
+    </div>
+
+    <div id="stock" class="tab-content">
+        <div class="card">
+            <h3>Manage Stock</h3>
+            <div class="autocomplete-wrapper">
+                <input type="text" id="stockName" autocomplete="off" placeholder="Search or track a new item...">
+                <div id="autocompleteList" class="autocomplete-items hidden"></div>
+            </div>
+            <button id="trackNewItemBtn" class="btn-primary" style="margin-top:12px; width:100%;">Add to Tracker</button>
+        </div>
+        <div id="stockList" class="list-container"></div>
+    </div>
+
+    <div id="alerts" class="tab-content">
+        <div class="card">
+            <h3>Low Stock Alerts</h3>
+            <p class="text-muted" style="margin-bottom:15px; font-size: 13px;">Get notified where to farm when your inventory drops below a limit.</p>
+            <div style="display:flex; gap:10px;">
+                <select id="alertItemSelect"><option value="">Select Item...</option></select>
+                <input type="number" id="alertLimit" placeholder="Min" style="width:90px;">
+                <button id="setAlertBtn" class="btn-primary">Set</button>
+            </div>
+        </div>
+        <div id="alertList" class="list-container"></div>
+    </div>
+
+    <div id="log" class="tab-content">
+        <div class="card stats-card">
+            <div class="stat-box">
+                <span class="text-muted">Today's Earnings</span>
+                <h3 class="text-green" id="todayEarnings">0s</h3>
+            </div>
+            <div class="stat-box">
+                <span class="text-muted">All-Time</span>
+                <h3 class="text-green" id="allTimeEarnings">0s</h3>
+            </div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 5px 10px 5px;">
+            <h3 class="section-title" style="margin: 0;">Transaction History</h3>
+            <button id="resetLogsBtn" class="btn-danger" style="padding: 6px 12px; font-size: 12px; width: auto; background: transparent; border: 1px solid var(--fee-red); color: var(--fee-red);">Reset Logs</button>
+        </div>
+        
+        <div id="earningsLog" class="list-container"></div>
+    </div>
+
+    <div id="cbModal" class="modal hidden">
+        <div class="modal-content card">
+            <h3 style="margin-bottom: 15px;">List on Board</h3>
+            <p id="modalSlotText" class="text-muted"></p>
+            <select id="modalItemSelect">
+                <option value="">Select from Stock...</option>
+            </select>
+            <input type="number" id="modalSellQty" placeholder="Stack Quantity (e.g. 99)" min="1">
+            <input type="number" id="modalPrice" placeholder="Total Stack Price (Spina)" min="1">
+            <div class="modal-actions">
+                <button id="cancelModalBtn" class="btn-secondary">Cancel</button>
+                <button id="confirmModalBtn" class="btn-primary">List Item</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+    </script>
+</body>
+</html>
