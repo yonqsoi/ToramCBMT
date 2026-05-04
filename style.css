@@ -119,19 +119,3 @@ button:active { transform: translateY(1px); }
 
 .btn-set { background: var(--bg-base); color: var(--text-main); border-color: #3f4147; }
 .btn-set:active { background: #3f4147; }
-/* Version Badge */
-.version-badge {
-    font-size: 11px;
-    background: rgba(88, 101, 242, 0.15);
-    color: var(--brand-blurple);
-    border: 1px solid rgba(88, 101, 242, 0.3);
-    padding: 3px 8px;
-    border-radius: 12px;
-    vertical-align: middle;
-    margin-left: 8px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: inline-block;
-    transform: translateY(-4px); /* Lifts it up slightly to align with the big text */
-}
