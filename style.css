@@ -52,7 +52,7 @@ body { background-color: var(--bg-body); color: var(--text-main); font-size: 14p
 
 /* Navigation Tabs */
 .tab-nav { display: flex; background: var(--bg-base); padding: 0 10px; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #3f4147; }
-.tab-btn { flex: 1; padding: 16px 2px; background: none; border: none; color: var(--text-muted); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 3px solid transparent; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+.tab-btn { flex: 1; padding: 16px 2px; background: none; border: none; color: var(--text-muted); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 3px solid transparent; cursor: pointer; transition: 0.2s; white-space: nowrap; border-radius: 0; }
 .tab-btn.active { color: var(--text-main); border-bottom-color: var(--brand-blurple); }
 .tab-content { display: none; padding-top: 10px; }
 .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
