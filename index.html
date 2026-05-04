@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>✨Toram CBMT💫</title>
+    <title>Toram CBMT</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -13,35 +13,37 @@
     <div class="app-header" style="text-align: center; padding: 15px 0 25px 0;">
         <h1 class="app-logo" style="margin-bottom: 5px;">✨ Toram CBMT 💫</h1>
         <p class="header-subtitle" style="margin: 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;">
-            Market & Tax Optimizer <span style="opacity: 0.5; margin-left: 5px;">V.21</span>
+            Market & Tax Optimizer <span style="opacity: 0.5; margin-left: 5px;">V.24</span>
         </p>
     </div>
 
-    <div class="card" style="margin-bottom: 20px;">
-        <span class="section-label" style="display: block; margin-bottom: 15px;">Active Tax Reductions</span>
+    <div style="padding: 0 15px 25px 15px;">
+        <div style="text-align: center; margin-bottom: 15px;">
+            <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 800;">Active Tax Reductions</span>
+        </div>
         
         <div class="tickets">
             <label class="ticket-label">
                 <input type="checkbox" id="tickStd">
                 <div class="ticket-card">
-                    <span class="ticket-name">Standard</span>
-                    <span class="ticket-desc">-20% Fee</span>
+                    <div class="ticket-name">Standard</div>
+                    <div class="ticket-desc">-20% Fee</div>
                 </div>
             </label>
             
             <label class="ticket-label">
                 <input type="checkbox" id="tickLvl">
                 <div class="ticket-card">
-                    <span class="ticket-name">Leveling</span>
-                    <span class="ticket-desc">-30% Fee</span>
+                    <div class="ticket-name">Leveling</div>
+                    <div class="ticket-desc">-30% Fee</div>
                 </div>
             </label>
 
             <label class="ticket-label">
                 <input type="checkbox" id="tickBag">
                 <div class="ticket-card">
-                    <span class="ticket-name">Bag</span>
-                    <span class="ticket-desc">-10% Fee</span>
+                    <div class="ticket-name">Bag</div>
+                    <div class="ticket-desc">-10% Fee</div>
                 </div>
             </label>
         </div>
@@ -160,8 +162,7 @@
 
             <button class="btn-primary" style="width: 100%; margin-top: 15px; padding: 14px; font-size: 16px;" onclick="calculateAppraisal()">Calculate Fair Value</button>
             
-            <div id="aprResult" style="margin-top:15px; display:none; background: var(--bg-base); padding: 15px; border-radius: 8px; font-size:14px; border: 1px solid var(--brand-blurple);">
-                </div>
+            <div id="aprResult" style="margin-top:15px; display:none; background: var(--bg-base); padding: 15px; border-radius: 8px; font-size:14px; border: 1px solid var(--brand-blurple);"></div>
         </div>
     </div>
 
@@ -240,23 +241,11 @@
     <script src="script.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js'); });
-        }
-    </script>
-        <script src="script.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            // 1. Register the Service Worker
             navigator.serviceWorker.register('sw.js').then(registration => {
-                
-                // 2. Watch for new updates from GitHub
                 registration.addEventListener('updatefound', () => {
                     const newWorker = registration.installing;
-                    
                     newWorker.addEventListener('statechange', () => {
-                        // 3. If a new version is downloaded and ready
                         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            // 4. Pop up a native prompt to the user
                             if (confirm("A new version of Toram CBMT is available! Tap OK to update.")) {
                                 window.location.reload();
                             }
@@ -265,7 +254,6 @@
                 });
             });
 
-            // 5. Instantly refresh the page if the service worker takes over
             let refreshing = false;
             navigator.serviceWorker.addEventListener('controllerchange', () => {
                 if (!refreshing) {
