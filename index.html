@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Toram CBMT</title>
+    <title>✨Toram CBMT💫</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
@@ -57,9 +58,11 @@
         </div>
     </div>
 
-    <nav class="tab-nav">
-        <button class="tab-btn active" data-tab="board">Board (14)</button>
+    <nav class="tab-nav" style="flex-wrap: wrap;">
+        <button class="tab-btn active" data-tab="board">Board</button>
         <button class="tab-btn" data-tab="stock">Stock</button>
+        <button class="tab-btn" data-tab="market">Flipping</button>
+        <button class="tab-btn" data-tab="appraise">Appraise</button>
         <button class="tab-btn" data-tab="alerts">Alerts <span id="alertBadge" class="badge hidden">!</span></button>
         <button class="tab-btn" data-tab="log">Logs</button>
     </nav>
@@ -80,11 +83,90 @@
         <div id="stockList" class="list-container"></div>
     </div>
 
+    <div id="market" class="tab-content">
+        <div class="card">
+            <h3 style="margin-bottom: 5px;">Flip Calculator</h3>
+            <p class="text-muted" style="font-size:12px; margin-bottom:12px;">Check if the tax kills your profit before buying.</p>
+            <div style="display:flex; gap:10px;">
+                <input type="number" id="flipBuy" placeholder="Buy Price (s)" style="flex:1;">
+                <input type="number" id="flipSell" placeholder="Est. Sell Price (s)" style="flex:1;">
+            </div>
+            <div id="flipResult" style="margin-top:12px; display:none; background: var(--bg-base); padding: 12px; border-radius: 8px; font-size:14px;"></div>
+        </div>
+
+        <div class="card" id="chartContainer" style="display:none; margin-top: 15px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+                <h3 style="margin:0; font-size: 16px;">Price Trends</h3>
+                <select id="chartItemSelect" style="width: auto; padding: 6px 10px; margin: 0; font-size: 12px; border-radius: 6px;"></select>
+            </div>
+            <div style="position: relative; height: 200px; width: 100%;">
+                <canvas id="priceGraph"></canvas>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 25px 5px 10px 5px;">
+            <h3 class="section-title" style="margin: 0;">Market Ticker</h3>
+        </div>
+        <div class="card">
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="tickerName" placeholder="E.g. Prime Piercer (OHS)" style="flex:2;">
+                <button id="addTickerBtn" class="btn-secondary" style="flex:1;">Watch</button>
+            </div>
+        </div>
+        <div id="marketTickerList" class="list-container"></div>
+    </div>
+
+    <div id="appraise" class="tab-content">
+        <div class="card">
+            <h3 style="margin-bottom: 5px;">Gear Value Estimator</h3>
+            <p class="text-muted" style="font-size:12px; margin-bottom:15px;">Calculate the true market value of crafted & slotted equipment.</p>
+            
+            <label class="text-muted" style="font-size: 12px; font-weight: bold;">Gear Type</label>
+            <select id="aprType">
+                <option value="weapon">Weapon (Can have 8 Stats)</option>
+                <option value="armor">Armor (Can have 8 Stats)</option>
+                <option value="add">Additional Gear (Fixed Stats)</option>
+                <option value="ring">Special / Ring (Fixed Stats)</option>
+            </select>
+
+            <label class="text-muted" style="font-size: 12px; font-weight: bold; margin-top: 10px; display: block;">Base Item Market Value (Spina)</label>
+            <input type="number" id="aprBasePrice" placeholder="Value of the empty item (e.g. 0S Base)">
+
+            <div id="aprStatContainer">
+                <label class="text-muted" style="font-size: 12px; font-weight: bold; margin-top: 10px; display: block;">Custom Stat Value (The Premium)</label>
+                <input type="number" id="aprStatPrice" placeholder="Value of the 8 Custom Stats (Spina)">
+            </div>
+
+            <label class="text-muted" style="font-size: 12px; font-weight: bold; margin-top: 10px; display: block;">Crystal Slots</label>
+            <select id="aprSlots">
+                <option value="0">0 Slots (NS)</option>
+                <option value="1">1 Slot</option>
+                <option value="2">2 Slots</option>
+            </select>
+
+            <datalist id="xtalDatalist"></datalist>
+
+            <div id="aprXtal1Container" style="display:none;">
+                <label class="text-muted" style="font-size: 12px; font-weight: bold; margin-top: 10px; display: block;">Slot 1 Crysta</label>
+                <input type="text" id="aprXtal1" list="xtalDatalist" placeholder="Type or select Xtal...">
+            </div>
+
+            <div id="aprXtal2Container" style="display:none;">
+                <label class="text-muted" style="font-size: 12px; font-weight: bold; margin-top: 10px; display: block;">Slot 2 Crysta</label>
+                <input type="text" id="aprXtal2" list="xtalDatalist" placeholder="Type or select Xtal...">
+            </div>
+
+            <button class="btn-primary" style="width: 100%; margin-top: 15px; padding: 14px; font-size: 16px;" onclick="calculateAppraisal()">Calculate Fair Value</button>
+            
+            <div id="aprResult" style="margin-top:15px; display:none; background: var(--bg-base); padding: 15px; border-radius: 8px; font-size:14px; border: 1px solid var(--brand-blurple);">
+                </div>
+        </div>
+    </div>
+
     <div id="alerts" class="tab-content">
         <div class="card">
             <h3>Low Stock Alerts</h3>
-            <p class="text-muted" style="margin-bottom:15px; font-size: 13px;">Get notified where to farm when your inventory drops below a limit.</p>
-            <div style="display:flex; gap:10px;">
+            <div style="display:flex; gap:10px; margin-top:15px;">
                 <select id="alertItemSelect"><option value="">Select Item...</option></select>
                 <input type="number" id="alertLimit" placeholder="Min" style="width:90px;">
                 <button id="setAlertBtn" class="btn-primary">Set</button>
@@ -104,12 +186,25 @@
                 <h3 class="text-green" id="allTimeEarnings">0s</h3>
             </div>
         </div>
+
+        <div class="card" id="logChartContainer" style="display:none; margin-top: 15px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+                <h3 style="margin:0; font-size: 16px;">Revenue Chart</h3>
+                <select id="logChartFilter" style="width: auto; padding: 6px 10px; margin: 0; font-size: 12px; border-radius: 6px;">
+                    <option value="day">By Day</option>
+                    <option value="week">By Week</option>
+                    <option value="month">By Month</option>
+                </select>
+            </div>
+            <div style="position: relative; height: 180px; width: 100%;">
+                <canvas id="logChartCanvas"></canvas>
+            </div>
+        </div>
         
         <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 5px 10px 5px;">
             <h3 class="section-title" style="margin: 0;">Transaction History</h3>
-            <button id="resetLogsBtn" class="btn-danger" style="padding: 6px 12px; font-size: 12px; width: auto; background: transparent; border: 1px solid var(--fee-red); color: var(--fee-red);">Reset Logs</button>
+            <button id="resetLogsBtn" class="btn-danger" style="padding: 6px 12px; font-size: 12px; width: auto; background: transparent; border: 1px solid var(--fee-red); color: var(--fee-red);">Reset</button>
         </div>
-        
         <div id="earningsLog" class="list-container"></div>
     </div>
 
@@ -117,10 +212,8 @@
         <div class="modal-content card">
             <h3 style="margin-bottom: 15px;">List on Board</h3>
             <p id="modalSlotText" class="text-muted"></p>
-            <select id="modalItemSelect">
-                <option value="">Select from Stock...</option>
-            </select>
-            <input type="number" id="modalSellQty" placeholder="Stack Quantity (e.g. 99)" min="1">
+            <select id="modalItemSelect"><option value="">Select from Stock...</option></select>
+            <input type="number" id="modalSellQty" placeholder="Stack Quantity (Max 99)" min="1">
             <input type="number" id="modalPrice" placeholder="Total Stack Price (Spina)" min="1">
             <div class="modal-actions">
                 <button id="cancelModalBtn" class="btn-secondary">Cancel</button>
@@ -129,12 +222,23 @@
         </div>
     </div>
 
+    <div id="tickerModal" class="modal hidden">
+        <div class="modal-content card">
+            <h3 style="margin-bottom: 15px;">Log Market Price</h3>
+            <p id="tickerModalName" class="text-muted" style="margin-bottom: 15px;"></p>
+            <input type="number" id="tickerPrice" placeholder="Current Lowest Price (s)" min="1">
+            <input type="number" id="tickerSupply" placeholder="Supply (e.g. Pages or Amount)" min="1">
+            <div class="modal-actions">
+                <button id="cancelTickerBtn" class="btn-secondary">Cancel</button>
+                <button id="confirmTickerBtn" class="btn-primary">Log Update</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js');
-            });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js'); });
         }
     </script>
 </body>

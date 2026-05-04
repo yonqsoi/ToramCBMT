@@ -1,10 +1,11 @@
-const CACHE_NAME = 'cbmt-v001'; 
+const CACHE_NAME = 'cbmt-v013'; 
 const urlsToCache = [
   'index.html',
   'style.css',
   'script.js',
   'manifest.json',
-  'icon.png'
+  'icon.png',
+  'items.json' // <-- Tells the app to save your database offline!
 ];
 
 self.addEventListener('install', event => {

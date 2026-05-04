@@ -52,7 +52,9 @@ body { background-color: var(--bg-base); color: var(--text-main); padding-bottom
 h1, h3 { color: var(--text-header); font-weight: 700; }
 
 .tab-nav { display: flex; background: var(--bg-surface); position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-.tab-btn { flex: 1; padding: 16px 5px; background: none; border: none; color: var(--text-muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; border-bottom: 3px solid transparent; transition: all 0.2s ease; cursor: pointer; }
+
+.tab-btn { flex: 1; padding: 16px 2px; background: none; border: none; color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; border-bottom: 3px solid transparent; transition: all 0.2s ease; cursor: pointer; }
+
 .tab-btn.active { color: var(--text-header); border-bottom: 3px solid var(--brand-blurple); }
 
 .badge { background: var(--fee-red); color: white; padding: 2px 6px; border-radius: 50%; font-size: 10px; position: absolute; top: 8px; right: 8px; font-weight: 800; }
@@ -104,3 +106,16 @@ button:active { transform: translateY(1px); }
 .modal-content { width: 92%; max-width: 400px; padding: 24px; }
 .modal-actions { display: flex; gap: 12px; margin-top: 15px; }
 .modal-actions button { flex: 1; padding: 14px; }
+/* Sleek Stock Tab Buttons */
+.btn-remove { background: transparent; color: var(--text-muted); border: 1px solid transparent; padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+.btn-remove:active { color: var(--fee-red); border-color: var(--fee-red); background: rgba(218, 55, 60, 0.1); }
+
+.btn-action { padding: 10px 5px; font-size: 13px; border-radius: 8px; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: 0.2s; background: transparent; }
+.btn-add { background: rgba(88, 101, 242, 0.15); color: var(--brand-blurple); border-color: rgba(88, 101, 242, 0.3); }
+.btn-add:active { background: var(--brand-blurple); color: white; }
+
+.btn-sub { background: rgba(218, 55, 60, 0.15); color: var(--fee-red); border-color: rgba(218, 55, 60, 0.3); }
+.btn-sub:active { background: var(--fee-red); color: white; }
+
+.btn-set { background: var(--bg-base); color: var(--text-main); border-color: #3f4147; }
+.btn-set:active { background: #3f4147; }
