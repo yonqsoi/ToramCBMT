@@ -10,57 +10,51 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-        <div class="app-header">
-        <h1 class="app-logo" style="text-align: center;">✨Toram CBMT💫</h1>
-        <p class="header-subtitle" style="text-align: center;">
-            Market & Tax Optimizer <span style="font-size: 11px; opacity: 0.5; margin-left: 4px; font-weight: 600;">v.20</span>
+    <div class="app-header" style="text-align: center; padding: 15px 0 25px 0;">
+        <h1 class="app-logo" style="margin-bottom: 5px;">✨ Toram CBMT 💫</h1>
+        <p class="header-subtitle" style="margin: 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;">
+            Market & Tax Optimizer <span style="opacity: 0.5; margin-left: 5px;">V.21</span>
         </p>
+    </div>
 
-        <div class="buff-section">
-            <span class="section-label">Active Tax Reductions</span>
-
-
-        <div class="buff-section">
-            <span class="section-label">Active Tax Reductions</span>
-
-
-            
-            <div class="tickets">
-                <label class="ticket-label">
-                    <input type="checkbox" id="tickStd">
-                    <div class="ticket-card">
-                        <span class="ticket-name">Standard</span>
-                        <span class="ticket-desc">-20% Fee</span>
-                    </div>
-                </label>
-                
-                <label class="ticket-label">
-                    <input type="checkbox" id="tickLvl">
-                    <div class="ticket-card">
-                        <span class="ticket-name">Leveling</span>
-                        <span class="ticket-desc">-30% Fee</span>
-                    </div>
-                </label>
-
-                <label class="ticket-label">
-                    <input type="checkbox" id="tickBag">
-                    <div class="ticket-card">
-                        <span class="ticket-name">Bag</span>
-                        <span class="ticket-desc">-10% Fee</span>
-                    </div>
-                </label>
-            </div>
-
-            <div class="guild-row">
-                <div class="guild-label">🛡️ Guild Market Buff</div>
-                <div style="display:flex; align-items:center;">
-                    <input type="number" id="guildBuff" class="guild-input" value="4" min="0" max="100">
-                    <span style="margin-left: 6px; font-size: 14px; color: var(--text-muted); font-weight: 700;">%</span>
+    <div class="card" style="margin-bottom: 20px;">
+        <span class="section-label" style="display: block; margin-bottom: 15px;">Active Tax Reductions</span>
+        
+        <div class="tickets">
+            <label class="ticket-label">
+                <input type="checkbox" id="tickStd">
+                <div class="ticket-card">
+                    <span class="ticket-name">Standard</span>
+                    <span class="ticket-desc">-20% Fee</span>
                 </div>
+            </label>
+            
+            <label class="ticket-label">
+                <input type="checkbox" id="tickLvl">
+                <div class="ticket-card">
+                    <span class="ticket-name">Leveling</span>
+                    <span class="ticket-desc">-30% Fee</span>
+                </div>
+            </label>
+
+            <label class="ticket-label">
+                <input type="checkbox" id="tickBag">
+                <div class="ticket-card">
+                    <span class="ticket-name">Bag</span>
+                    <span class="ticket-desc">-10% Fee</span>
+                </div>
+            </label>
+        </div>
+
+        <div class="guild-row" style="margin-top: 15px;">
+            <div class="guild-label">🛡️ Guild Market Buff</div>
+            <div style="display:flex; align-items:center;">
+                <input type="number" id="guildBuff" class="guild-input" value="4" min="0" max="100">
+                <span style="margin-left: 6px; font-size: 14px; color: var(--text-muted); font-weight: 700;">%</span>
             </div>
         </div>
 
-        <div class="fee-highlight-card">
+        <div class="fee-highlight-card" style="margin-top: 15px;">
             <span class="fee-highlight-label">Effective Market Fee:</span>
             <span id="feeDisplay" class="fee-highlight-value">10.0%</span>
         </div>
